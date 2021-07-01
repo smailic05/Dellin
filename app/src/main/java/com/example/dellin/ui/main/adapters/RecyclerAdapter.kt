@@ -12,9 +12,8 @@ import com.example.dellin.TerminalsParsed
 import com.example.dellin.ui.main.MainFragmentDirections
 import com.example.dellin.ui.main.SecondFragmentDirections
 
-class RecyclerAdapter(private val dataSet: ArrayList<TerminalsParsed?>):
+class RecyclerAdapter(private val dataSet: List<TerminalsParsed?>):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.terminals)
     }
@@ -26,6 +25,7 @@ class RecyclerAdapter(private val dataSet: ArrayList<TerminalsParsed?>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val amount=dataSet[position]
         holder.textView.text=amount?.name
         holder.textView.setOnClickListener {

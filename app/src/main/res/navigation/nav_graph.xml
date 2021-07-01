@@ -12,7 +12,15 @@
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/out"
-            app:destination="@id/secondFragment" />
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out">
+            <argument
+                android:name="chooseTab"
+                android:defaultValue="0"
+                app:argType="integer" />
+        </action>
         <argument
             android:name="clickArgs"
             app:argType="integer"
@@ -22,13 +30,21 @@
         android:id="@+id/secondFragment"
         android:name="com.example.dellin.ui.main.SecondFragment"
         android:label="SecondFragment" >
+        <argument
+            android:name="chooseTab"
+            app:argType="integer"
+            android:defaultValue="0">
+        </argument>
         <action
             android:id="@+id/clicked"
-            app:destination="@id/mainFragment">
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out">
             <argument
                 android:name="clickArgs"
-                app:argType="integer"
-                android:defaultValue="-1"/>
+                android:defaultValue="-1"
+                app:argType="integer" />
         </action>
     </fragment>
 </navigation>

@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.dellin.MainViewModel
 import com.example.dellin.R
 import com.example.dellin.databinding.MainFragmentBinding
 
@@ -36,11 +36,18 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.outButton.setOnClickListener {
-            findNavController().navigate(R.id.out)
+            val action=MainFragmentDirections.out()
+            action.chooseTab=0
+            findNavController().navigate(action)
+        }
+        binding.inButton.setOnClickListener {
+            val action=MainFragmentDirections.out()
+            action.chooseTab=1
+            findNavController().navigate(action)
         }
         if(args.clickArgs!=-1)
         {
-            val source=model.arrayOfTerminals[args.clickArgs]
+            val source= model.array?.get(args.clickArgs)
             if (source!=null)
             {
                 binding.textNameOut.text=source.name
@@ -49,12 +56,13 @@ class MainFragment : Fragment() {
                 binding.longitudeOut.text=source.longitude
                 binding.receiveCargoOut.text=source.receiveCargo.toString()
                 binding.giveoutCargoOut.text=source.giveoutCargo.toString()
-                binding.defaultOut.text=source.default.toString()
+                binding.defaultOut.text=source.defaultTerminal.toString()
                 //binding.worktable.text=source.worktable.toString()
                 binding.outGroup.visibility= VISIBLE
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

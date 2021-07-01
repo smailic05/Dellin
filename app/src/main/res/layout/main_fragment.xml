@@ -7,77 +7,88 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
+    <Button
+        android:id="@+id/inButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="140dp"
+        android:text="Куда"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/receiveCargoIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintBottom_toTopOf="@+id/giveoutCargoIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/longitudeIn" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/latitudeIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintBottom_toTopOf="@+id/longitudeIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/addressIn" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/worktableI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/defaultIn" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/defaultIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintBottom_toTopOf="@+id/worktableI"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/giveoutCargoIn" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/nameIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintBottom_toTopOf="@+id/addressIn"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/giveoutCargoIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintBottom_toTopOf="@+id/defaultIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/receiveCargoIn" />
 
     <TextView
-        android:id="@+id/textView16"
-        android:layout_width="56dp"
-        android:layout_height="21dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/addressIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintBottom_toTopOf="@+id/latitudeIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/nameIn" />
+
+    <TextView
+        android:id="@+id/longitudeIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/receiveCargoIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/latitudeIn" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/outGroup"
@@ -102,10 +113,10 @@
         android:id="@+id/addressOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/latitudeOut"
-        app:layout_constraintEnd_toEndOf="@+id/textNameOut"
-        app:layout_constraintStart_toStartOf="@+id/textNameOut"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textNameOut" />
 
     <TextView
@@ -114,8 +125,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/longitudeOut"
-        app:layout_constraintEnd_toEndOf="@+id/addressOut"
-        app:layout_constraintStart_toStartOf="@+id/addressOut"
+
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/addressOut" />
 
     <TextView
@@ -124,8 +135,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/receiveCargoOut"
-        app:layout_constraintEnd_toEndOf="@+id/latitudeOut"
-        app:layout_constraintStart_toStartOf="@+id/latitudeOut"
+
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/latitudeOut" />
 
     <TextView
@@ -134,8 +145,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/giveoutCargoOut"
-        app:layout_constraintEnd_toEndOf="@+id/longitudeOut"
-        app:layout_constraintStart_toStartOf="@+id/longitudeOut"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/longitudeOut" />
 
     <TextView
@@ -144,8 +154,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/defaultOut"
-        app:layout_constraintEnd_toEndOf="@+id/receiveCargoOut"
-        app:layout_constraintStart_toStartOf="@+id/receiveCargoOut"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/receiveCargoOut" />
 
     <TextView
@@ -154,8 +164,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/worktable"
-        app:layout_constraintEnd_toEndOf="@+id/giveoutCargoOut"
-        app:layout_constraintStart_toStartOf="@+id/giveoutCargoOut"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/giveoutCargoOut" />
 
     <TextView
@@ -164,8 +173,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toEndOf="@+id/defaultOut"
-        app:layout_constraintStart_toStartOf="@+id/defaultOut"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/defaultOut" />
 
     <androidx.constraintlayout.widget.Guideline
