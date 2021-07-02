@@ -9,7 +9,6 @@ import com.example.dellin.ui.main.PagerFragment
 class ViewPagerFragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int = 2
-    override fun createFragment(position: Int): Fragment=
-        PagerFragment(position)
+    override fun createFragment(position: Int): Fragment= PagerFragment(position)
 
 }

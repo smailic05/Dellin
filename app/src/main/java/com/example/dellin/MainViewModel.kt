@@ -1,6 +1,7 @@
 package com.example.dellin
 
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dellin.*
@@ -13,6 +14,12 @@ class MainViewModel : ViewModel() {
     private val repository: TerminalsRepository = TerminalsRepository()
     private val roomRepository=RoomRepository()
 
+    companion object{
+        var firstVisibility:Int= View.INVISIBLE
+        var secondVisibility:Int= View.INVISIBLE
+        var firstTerminals:TerminalsParsed?=null
+        var secondTerminals:TerminalsParsed?=null
+    }
     var array:Array<TerminalsParsed?>?=null
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {

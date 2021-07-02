@@ -2,17 +2,17 @@ package com.example.dellin.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.View
-
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dellin.MainViewModel
 import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
-import com.example.dellin.ui.main.MainFragmentDirections
 import com.example.dellin.ui.main.SecondFragmentDirections
+import java.util.*
 
-class RecyclerAdapter(private val dataSet: List<TerminalsParsed?>):
+class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, private val page:Int):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.terminals)
@@ -30,10 +30,33 @@ class RecyclerAdapter(private val dataSet: List<TerminalsParsed?>):
         holder.textView.text=amount?.name
         holder.textView.setOnClickListener {
             val action = SecondFragmentDirections.clicked()
-            action.clickArgs=position
+            when(page)
+            {
+                0->MainViewModel.firstTerminals=amount
+                1->MainViewModel.secondTerminals=amount
+            }
             it.findNavController().navigate(action)
+
         }
     }
 
     override fun getItemCount(): Int = dataSet.size
+
+    fun filter(text: String) {
+        val dataSetCopy= dataSet
+        dataSet.clear()
+        val findText: String
+        if (text.isEmpty()) {
+            dataSet.addAll(dataSetCopy)
+        } else {
+            findText = text.lowercase(Locale.getDefault())
+            for (item in dataSetCopy) {
+                if (item?.name?.lowercase(Locale.ROOT)!!.contains(findText))
+                {
+                    dataSet.add(item)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
 }
