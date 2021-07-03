@@ -18,4 +18,5 @@ class RoomRepository {
     {
         return db?.terminalsDao()?.getAllTerminals()
     }
+
 }

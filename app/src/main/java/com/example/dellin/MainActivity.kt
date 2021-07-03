@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
     }
 
+
     override fun hideAppBar() {
         supportActionBar?.hide()
     }

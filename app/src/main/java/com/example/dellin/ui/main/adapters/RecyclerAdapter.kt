@@ -11,9 +11,14 @@ import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.ui.main.SecondFragmentDirections
 import java.util.*
+import java.util.Collections.addAll
 
 class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, private val page:Int):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+    private val dataSetCopy= mutableListOf<TerminalsParsed?>()
+    init {
+        dataSetCopy.addAll(dataSet)
+    }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.terminals)
     }
@@ -43,9 +48,8 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
     override fun getItemCount(): Int = dataSet.size
 
     fun filter(text: String) {
-        val dataSetCopy= dataSet
-        dataSet.clear()
         val findText: String
+        dataSet.clear()
         if (text.isEmpty()) {
             dataSet.addAll(dataSetCopy)
         } else {
@@ -57,6 +61,10 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
                 }
             }
         }
+        notifyDataSetChanged()
+    }
+    fun sort() {
+        dataSet.reverse()
         notifyDataSetChanged()
     }
 }

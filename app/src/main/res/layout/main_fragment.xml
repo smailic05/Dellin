@@ -21,6 +21,7 @@
         android:id="@+id/inButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="140dp"
         android:text="Куда"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,11 +212,12 @@
         android:src="@drawable/ic_launcher_background"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
-        android:text="Button"
+        android:text="сохранить"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7" />
 

@@ -2,18 +2,20 @@ package com.example.dellin
 
 
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dellin.*
 import com.example.dellin.retrofit.TerminalsRepository
 import com.example.dellin.room.AppDatabase
+//import com.example.dellin.room.Order
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
     private val repository: TerminalsRepository = TerminalsRepository()
     private val roomRepository=RoomRepository()
-
+    private val db=Dellin.instance?.getDatabase()
     companion object{
         var firstVisibility:Int= View.INVISIBLE
         var secondVisibility:Int= View.INVISIBLE
@@ -28,13 +30,15 @@ class MainViewModel : ViewModel() {
             updateArray()
         }
         catch (exception: Exception) {
-            val q=exception.message
         }
     }
 
     private fun save(arr:Array<TerminalsParsed>) {
         roomRepository.insertIntoDatabase(arr)
     }
+//    fun saveOrder()=viewModelScope.launch(Dispatchers.IO) {
+//        db?.terminalsDao()?.insertOrder(Order( firstTerminals!!,secondTerminals!!))
+//    }
     fun updateArray()
     {
         array= roomRepository.getAllTerminals()

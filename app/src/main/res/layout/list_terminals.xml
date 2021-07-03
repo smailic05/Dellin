@@ -9,6 +9,7 @@
         android:id="@+id/terminals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem/random"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:text="@tools:sample/lorem/random" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

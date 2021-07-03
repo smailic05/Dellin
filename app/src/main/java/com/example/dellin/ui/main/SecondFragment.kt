@@ -30,12 +30,7 @@ class SecondFragment: Fragment(),AppBarInterface {
         savedInstanceState: Bundle?
     ): View {
         _binding = SecondFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         val currentTab:Int=args.chooseTab
         binding.viewPager.adapter=ViewPagerFragmentAdapter(requireActivity())
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -44,9 +39,14 @@ class SecondFragment: Fragment(),AppBarInterface {
                 1->tab.text="куда"
             }
         }.attach()
-        binding.viewPager.post{
-            binding.viewPager.currentItem=currentTab/// Does not work without it
-        }
+        binding.viewPager.setCurrentItem(currentTab,false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         appBar?.showAppBar()
 
     }

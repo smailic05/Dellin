@@ -2,18 +2,14 @@ package com.example.dellin.ui.main
 
 import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.dellin.AppBarInterface
-import com.example.dellin.MainViewModel
-import com.example.dellin.R
+import com.example.dellin.*
 import com.example.dellin.databinding.MainFragmentBinding
 
 class MainFragment : Fragment(),AppBarInterface {
@@ -32,13 +28,14 @@ class MainFragment : Fragment(),AppBarInterface {
         savedInstanceState: Bundle?
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
+        appBar?.hideAppBar()
         val view = binding.root
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appBar?.hideAppBar()
+        //appBar?.hideAppBar()
         binding.outButton.setOnClickListener {
             val action=MainFragmentDirections.out()
             action.chooseTab=0
@@ -49,6 +46,9 @@ class MainFragment : Fragment(),AppBarInterface {
             action.chooseTab=1
             findNavController().navigate(action)
         }
+//        binding.save.setOnClickListener {
+//            model.saveOrder()
+//        }
 
         if (MainViewModel.firstTerminals!=null)
             {
@@ -77,6 +77,8 @@ class MainFragment : Fragment(),AppBarInterface {
 
         binding.outGroup.visibility=MainViewModel.firstVisibility
         binding.inGroup.visibility=MainViewModel.secondVisibility
+        if (MainViewModel.firstVisibility== VISIBLE&& MainViewModel.secondVisibility== VISIBLE)
+            binding.save.isEnabled=true
 
     }
 

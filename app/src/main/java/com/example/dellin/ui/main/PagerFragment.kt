@@ -1,26 +1,27 @@
 package com.example.dellin.ui.main
 
+
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.view.*
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
 import com.example.dellin.MainViewModel
+import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.databinding.RecyclerLayoutBinding
-import com.example.dellin.databinding.SecondFragmentBinding
 import com.example.dellin.ui.main.adapters.RecyclerAdapter
-
-
 
 class PagerFragment(private val position: Int) : Fragment() {
     private var _binding: RecyclerLayoutBinding? = null
     private val binding get() = _binding!!
     private val model: MainViewModel by activityViewModels()
     private val list= mutableListOf<TerminalsParsed?>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true);
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,22 +32,52 @@ class PagerFragment(private val position: Int) : Fragment() {
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val array=model.array
-        //(activity as AppCompatActivity).supportActionBar?.searchView
-        when(position){
-            0-> {
-                if (array!=null)
-                for (i in array.indices)
-                    if (array[i]?.giveoutCargo == true)
-                        list.add(array[i])
+        val array = model.array
+
+
+        when (position) {
+            0 -> {
+                if (array != null)
+                    for (i in array.indices)
+                        if (array[i]?.giveoutCargo == true && array[i]?.giveoutCargo ==true)
+                            list.add(array[i])
             }
-            1->{
-                if (array!=null)
-                for (i in array.indices)
-                    if (array[i]?.receiveCargo == true)
-                        list.add(array[i])
+            1 -> {
+                if (array != null)
+                    for (i in array.indices)
+                        if (array[i]?.receiveCargo == true)
+                            list.add(array[i])
             }
         }
-        binding.recycler.adapter= RecyclerAdapter(list,position)
+        binding.recycler.adapter = RecyclerAdapter(list, position)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        val myActionMenuItem = menu.findItem(R.id.search)
+        val searchView=myActionMenuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query!=null)
+                (binding.recycler.adapter as RecyclerAdapter).filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!=null)
+                    (binding.recycler.adapter as RecyclerAdapter).filter(newText)
+                return true
+            }
+
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return  if (item.itemId==R.id.sort) {
+            (binding.recycler.adapter as RecyclerAdapter).sort()
+            true
+        }else
+            return super.onOptionsItemSelected(item)
     }
 }
