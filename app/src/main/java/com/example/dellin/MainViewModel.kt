@@ -2,20 +2,19 @@ package com.example.dellin
 
 
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dellin.*
 import com.example.dellin.retrofit.TerminalsRepository
-import com.example.dellin.room.AppDatabase
+import com.example.dellin.room.RoomRepository
 //import com.example.dellin.room.Order
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+
     private val repository: TerminalsRepository = TerminalsRepository()
-    private val roomRepository=RoomRepository()
-    private val db=Dellin.instance?.getDatabase()
+    private val roomRepository= RoomRepository()
+    //private val db=Dellin.instance?.getDatabase()
     companion object{
         var firstVisibility:Int= View.INVISIBLE
         var secondVisibility:Int= View.INVISIBLE

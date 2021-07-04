@@ -1,6 +1,7 @@
 package com.example.dellin
 
 import android.app.Application
+import android.location.Location
 import androidx.room.Room
 import com.example.dellin.room.AppDatabase
 
@@ -8,6 +9,7 @@ import com.example.dellin.room.AppDatabase
 class Dellin:Application() {
 
     companion object{
+        lateinit var location: Location
         var instance: Dellin? = null
     }
 

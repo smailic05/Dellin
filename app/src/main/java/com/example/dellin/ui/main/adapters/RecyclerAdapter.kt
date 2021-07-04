@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dellin.Dellin
 import com.example.dellin.MainViewModel
 import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.ui.main.SecondFragmentDirections
 import java.util.*
 import java.util.Collections.addAll
+import kotlin.math.pow
 
 class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, private val page:Int):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
@@ -64,7 +66,12 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
         notifyDataSetChanged()
     }
     fun sort() {
-        dataSet.reverse()
+        dataSet.sortBy{it?.name}
+        notifyDataSetChanged()
+    }
+    fun sortByLocation(){
+        dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(Dellin.location.longitude))?.pow(2)
+            ?.plus((it.latitude?.toDouble()?.minus(Dellin.location.latitude))?.pow(2)!!))?.pow(0.5) }// TODO сделать сортировку в репозитории
         notifyDataSetChanged()
     }
 }

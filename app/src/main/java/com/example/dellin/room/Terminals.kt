@@ -3,6 +3,7 @@ package com.example.dellin
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 //data class WorktableParsed(
 //
@@ -45,6 +46,20 @@ data class TerminalsParsed(@PrimaryKey
                            var defaultTerminal:Boolean?,
                            @ColumnInfo(name = "maps")
                             var maps: String?)
+{
+
+    fun pack():String
+    {
+        return "$id,$name,$address,$latitude,$longitude,$receiveCargo,$giveoutCargo,$defaultTerminal,$maps"
+    }
+//    fun unpack(string: String):TerminalsParsed
+//    {
+//        val arr= string.split(",")
+//        return TerminalsParsed(arr[0].toInt(),arr[0],arr[0],arr[0],arr[0],arr[0].toBoolean(),
+//                arr[0].toBoolean(),arr[0].toBoolean(),arr[0])
+//    }
+
+}
 
 
 

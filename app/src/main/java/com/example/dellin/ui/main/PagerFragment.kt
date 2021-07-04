@@ -74,10 +74,16 @@ class PagerFragment(private val position: Int) : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return  if (item.itemId==R.id.sort) {
-            (binding.recycler.adapter as RecyclerAdapter).sort()
-            true
-        }else
-            return super.onOptionsItemSelected(item)
+        return  when(item.itemId) {
+                R.id.sort-> {
+                    (binding.recycler.adapter as RecyclerAdapter).sort()
+                    true
+                }
+                R.id.sortLocation -> {
+                (binding.recycler.adapter as RecyclerAdapter).sortByLocation()
+                true
+            }
+            else ->return super.onOptionsItemSelected(item)
+    }
     }
 }

@@ -1,7 +1,9 @@
 package com.example.dellin.retrofit
+import com.example.dellin.Dellin
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.retrofit.RetrofitBuilder
 import com.example.dellin.retrofit.TerminalApi
+import kotlin.math.pow
 
 class TerminalsRepository {
     var terminal: TerminalApi = RetrofitBuilder.apiService
