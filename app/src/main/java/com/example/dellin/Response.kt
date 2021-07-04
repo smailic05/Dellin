@@ -90,6 +90,18 @@ data class Worktables(
 	@field:SerializedName("worktable")
 	val worktable: List<WorktableItem?>? = null
 )
+{
+	companion object{
+		fun undoConvert(worktable: String):Worktables
+		{
+			val worktableItem= mutableListOf<WorktableItem>()
+			val temp=worktable.split("&")
+			for (item in temp)
+				worktableItem.add(WorktableItem.undoConvert(item))
+			return Worktables(worktableItem)
+		}
+	}
+}
 
 data class Terminals(
 
@@ -236,12 +248,11 @@ data class TerminalItem(
 )
 
 data class WorktableItem(
+	@field:SerializedName("department")
+	val department: String? = null,
 
-	@field:SerializedName("sunday")
-	val sunday: String? = null,
-
-	@field:SerializedName("saturday")
-	val saturday: String? = null,
+	@field:SerializedName("monday")
+	val monday: String? = null,
 
 	@field:SerializedName("tuesday")
 	val tuesday: String? = null,
@@ -255,12 +266,24 @@ data class WorktableItem(
 	@field:SerializedName("friday")
 	val friday: String? = null,
 
-	@field:SerializedName("department")
-	val department: String? = null,
+	@field:SerializedName("saturday")
+	val saturday: String? = null,
 
-	@field:SerializedName("monday")
-	val monday: String? = null,
+	@field:SerializedName("sunday")
+	val sunday: String? = null,
 
 	@field:SerializedName("timetable")
 	val timetable: String? = null
 )
+{
+	companion object {
+		fun undoConvert(worktableItem: String):WorktableItem
+		{
+			val items = worktableItem.split(",")
+			return WorktableItem(
+				items[0], items[1], items[2], items[3], items[4], items[5],
+				items[6], items[7], items[8]
+			)
+		}
+	}
+}

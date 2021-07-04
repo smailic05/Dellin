@@ -5,26 +5,19 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-//data class WorktableParsed(
-//
-//    var sunday: String? = null,
-//
-//    var saturday: String? = null,
-//
-//    var tuesday: String? = null,
-//
-//    var wednesday: String? = null,
-//
-//    var thursday: String? = null,
-//
-//    var friday: String? = null,
-//
-//    var department: String? = null,
-//
-//    var monday: String? = null,
-//
-//    var timetable: String? = null
-//)
+fun WorktableItem.convert():String
+{
+    return "$department,$monday,$tuesday,$wednesday,$thursday,$friday,$saturday,$sunday,$timetable"
+}
+fun Worktables.convert():String
+{
+    var temp=""
+    if (worktable != null) {
+        for (item in worktable)
+            temp+=item?.convert()+"&"
+    }
+    return temp
+}
 
 @Entity(tableName = "terminalsparsed")
 data class TerminalsParsed(@PrimaryKey
@@ -44,13 +37,14 @@ data class TerminalsParsed(@PrimaryKey
                            var giveoutCargo:Boolean?,
                            @ColumnInfo(name = "default")
                            var defaultTerminal:Boolean?,
+                           var worktable: String?,
                            @ColumnInfo(name = "maps")
                             var maps: String?)
 {
 
     fun pack():String
     {
-        return "$id,$name,$address,$latitude,$longitude,$receiveCargo,$giveoutCargo,$defaultTerminal,$maps"
+        return "$id,$name,$address,$latitude,$longitude,$receiveCargo,$giveoutCargo,$defaultTerminal,$worktable,$maps"
     }
 
 }

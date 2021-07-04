@@ -61,7 +61,7 @@ class MainFragment : Fragment(),AppBarInterface {
                 binding.receiveCargoOut.text = MainViewModel.firstTerminals?.receiveCargo.toString()
                 binding.giveoutCargoOut.text = MainViewModel.firstTerminals?.giveoutCargo.toString()
                 binding.defaultOut.text = MainViewModel.firstTerminals?.defaultTerminal.toString()
-                //binding.worktable.text=source.worktable.toString()
+                binding.worktable.text=MainViewModel.firstTerminals?.worktable
                 MainViewModel.firstVisibility = VISIBLE
             }
         if (MainViewModel.secondTerminals!=null)
@@ -73,7 +73,7 @@ class MainFragment : Fragment(),AppBarInterface {
             binding.receiveCargoIn.text = MainViewModel.secondTerminals?.receiveCargo.toString()
             binding.giveoutCargoIn.text = MainViewModel.secondTerminals?.giveoutCargo.toString()
             binding.defaultIn.text = MainViewModel.secondTerminals?.defaultTerminal.toString()
-            //binding.worktable.text=source.worktable.toString()
+            binding.worktableIn.text=MainViewModel.secondTerminals?.worktable
             MainViewModel.secondVisibility = VISIBLE
         }
 

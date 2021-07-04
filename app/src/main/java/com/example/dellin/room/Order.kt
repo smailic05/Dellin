@@ -15,7 +15,7 @@ data class Order (@PrimaryKey(autoGenerate = true)
                   var inTerminal: TerminalsParsed)
 {
     constructor (outTerminal: TerminalsParsed,
-            inTerminal: TerminalsParsed):this(Order.idDatabase++,outTerminal,inTerminal) {
+            inTerminal: TerminalsParsed):this(idDatabase++,outTerminal,inTerminal) {
 
     }
     companion object{
@@ -37,6 +37,6 @@ class HobbiesConverter {
     {
         val arr= string.split(",")
         return TerminalsParsed(arr[0].toInt(),arr[1],arr[2],arr[3],arr[4],arr[5].toBoolean(),
-            arr[6].toBoolean(),arr[7].toBoolean(),arr[8])
+            arr[6].toBoolean(),arr[7].toBoolean(),arr[8],arr[9])
     }
 }
