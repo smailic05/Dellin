@@ -16,6 +16,7 @@ import com.example.dellin.ui.main.adapters.RecyclerAdapter
 class PagerFragment(private val position: Int) : Fragment() {
     private var _binding: RecyclerLayoutBinding? = null
     private val binding get() = _binding!!
+
     private val model: MainViewModel by activityViewModels()
     private val list= mutableListOf<TerminalsParsed?>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +30,12 @@ class PagerFragment(private val position: Int) : Fragment() {
     ): View {
         _binding = RecyclerLayoutBinding.inflate(inflater, container, false)
         val view = binding.root
+
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         val array = model.array
-
-
         when (position) {
             0 -> {
                 if (array != null)
@@ -68,22 +69,19 @@ class PagerFragment(private val position: Int) : Fragment() {
                     (binding.recycler.adapter as RecyclerAdapter).filter(newText)
                 return true
             }
-
         })
+        menu.findItem(R.id.sort).setOnMenuItemClickListener {
+            (binding.recycler.adapter as RecyclerAdapter).sort()
+            true
+        }
+        menu.findItem(R.id.sortLocation).setOnMenuItemClickListener {
+            (binding.recycler.adapter as RecyclerAdapter).sortByLocation()
+            true
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return  when(item.itemId) {
-                R.id.sort-> {
-                    (binding.recycler.adapter as RecyclerAdapter).sort()
-                    true
-                }
-                R.id.sortLocation -> {
-                (binding.recycler.adapter as RecyclerAdapter).sortByLocation()
-                true
-            }
-            else ->return super.onOptionsItemSelected(item)
-    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding=null
     }
 }
