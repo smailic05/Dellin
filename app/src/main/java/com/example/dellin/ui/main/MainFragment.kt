@@ -37,18 +37,20 @@ class MainFragment : Fragment(),AppBarInterface {
         super.onViewCreated(view, savedInstanceState)
         //appBar?.hideAppBar()
         binding.outButton.setOnClickListener {
+            binding.outButton.setOnClickListener(null)
             val action=MainFragmentDirections.out()
             action.chooseTab=0
             findNavController().navigate(action)
         }
         binding.inButton.setOnClickListener {
+            binding.inButton.setOnClickListener(null)
             val action=MainFragmentDirections.out()
             action.chooseTab=1
             findNavController().navigate(action)
         }
-//        binding.save.setOnClickListener {
-//            model.saveOrder()
-//        }
+        binding.save.setOnClickListener {
+            model.saveOrder()
+        }
 
         if (MainViewModel.firstTerminals!=null)
             {

@@ -52,12 +52,6 @@ data class TerminalsParsed(@PrimaryKey
     {
         return "$id,$name,$address,$latitude,$longitude,$receiveCargo,$giveoutCargo,$defaultTerminal,$maps"
     }
-//    fun unpack(string: String):TerminalsParsed
-//    {
-//        val arr= string.split(",")
-//        return TerminalsParsed(arr[0].toInt(),arr[0],arr[0],arr[0],arr[0],arr[0].toBoolean(),
-//                arr[0].toBoolean(),arr[0].toBoolean(),arr[0])
-//    }
 
 }
 

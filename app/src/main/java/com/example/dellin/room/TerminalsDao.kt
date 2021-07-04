@@ -15,7 +15,10 @@ interface TerminalsDao {
         @Query("SELECT * FROM terminalsparsed ORDER BY name ASC")
         fun getAllTerminals(): Array<TerminalsParsed?>?
 
-//        @Insert
-//        fun insertOrder(order: Order)
+        @Insert
+        fun insertOrder(order: Order)
+
+        @Query("SELECT * FROM orders")
+        fun getAllOrders(): Array<Order?>?
 
 }
