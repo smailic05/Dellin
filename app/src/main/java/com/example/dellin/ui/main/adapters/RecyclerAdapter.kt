@@ -41,7 +41,7 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
             {
                 0->MainViewModel.firstTerminals=amount
                 1->MainViewModel.secondTerminals=amount
-            }
+            }// TODO сделать аргументами
             it.findNavController().navigate(action)
 
         }
@@ -79,8 +79,9 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
         }
     }
     fun sortByLocation(){
-        dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(Dellin.location.longitude))?.pow(2)
-            ?.plus((it.latitude?.toDouble()?.minus(Dellin.location.latitude))?.pow(2)!!))?.pow(0.5) }// TODO сделать сортировку в репозитории
+        if (Dellin.location!=null)
+        dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(Dellin.location!!.longitude))?.pow(2)
+            ?.plus((it.latitude?.toDouble()?.minus(Dellin.location!!.latitude))?.pow(2)!!))?.pow(0.5) }// TODO сделать сортировку в репозитории
         notifyDataSetChanged()
         isSortedByAbc=false
     }

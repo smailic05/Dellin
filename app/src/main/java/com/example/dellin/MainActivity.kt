@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -17,9 +18,19 @@ import com.google.android.gms.location.*
 
 class MainActivity : AppCompatActivity(), AppBarInterface {
     private lateinit var binding: MainActivityBinding
-    lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val requestPermissionLauncher =registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(this, "Nice", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Require permission", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = MainActivityBinding.inflate(layoutInflater)
         val model: MainViewModel by viewModels()
         val view = binding.root
@@ -44,6 +55,9 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             Toast.makeText(this, "Require permission", Toast.LENGTH_SHORT).show()
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+
         }
     }
 

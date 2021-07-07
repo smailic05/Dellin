@@ -9,7 +9,7 @@ import com.example.dellin.room.AppDatabase
 class Dellin:Application() {
 
     companion object{
-        lateinit var location: Location
+        var location: Location?=null
         var instance: Dellin? = null
     }
 

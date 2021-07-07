@@ -9,6 +9,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.example.dellin.*
 import com.example.dellin.databinding.MainFragmentBinding
 
@@ -62,6 +63,7 @@ class MainFragment : Fragment(),AppBarInterface {
                 binding.giveoutCargoOut.text = MainViewModel.firstTerminals?.giveoutCargo.toString()
                 binding.defaultOut.text = MainViewModel.firstTerminals?.defaultTerminal.toString()
                 binding.worktable.text=MainViewModel.firstTerminals?.worktable
+                binding.imageOut.load(MainViewModel.firstTerminals?.maps)
                 MainViewModel.firstVisibility = VISIBLE
             }
         if (MainViewModel.secondTerminals!=null)
@@ -74,6 +76,7 @@ class MainFragment : Fragment(),AppBarInterface {
             binding.giveoutCargoIn.text = MainViewModel.secondTerminals?.giveoutCargo.toString()
             binding.defaultIn.text = MainViewModel.secondTerminals?.defaultTerminal.toString()
             binding.worktableIn.text=MainViewModel.secondTerminals?.worktable
+            binding.imageOut.load(MainViewModel.secondTerminals?.maps)
             MainViewModel.secondVisibility = VISIBLE
         }
 

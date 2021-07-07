@@ -17,15 +17,15 @@ class MainViewModel : ViewModel() {
     private val repository: TerminalsRepository = TerminalsRepository()
     private val roomRepository= RoomRepository()
     private val db=Dellin.instance?.getDatabase()
-    var q: Array<Order?>? = null
+    var array:Array<TerminalsParsed?>?=null
 
     companion object{
         var firstVisibility:Int= View.INVISIBLE
         var secondVisibility:Int= View.INVISIBLE
         var firstTerminals:TerminalsParsed?=null
         var secondTerminals:TerminalsParsed?=null
-    }
-    var array:Array<TerminalsParsed?>?=null
+    }// TODO переместить в mainfragment
+
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
             val arr=repository.createRequest()
@@ -33,7 +33,7 @@ class MainViewModel : ViewModel() {
             updateArray()
         }
         catch (exception: Exception) {
-            TODO()
+            Toast.makeText(Dellin.instance, exception.message, Toast.LENGTH_SHORT).show()
         }
     }
 

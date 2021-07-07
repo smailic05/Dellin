@@ -37,6 +37,7 @@ data class TerminalsParsed(@PrimaryKey
                            var giveoutCargo:Boolean?,
                            @ColumnInfo(name = "default")
                            var defaultTerminal:Boolean?,
+                           @ColumnInfo(name = "worktable")
                            var worktable: String?,
                            @ColumnInfo(name = "maps")
                             var maps: String?)
