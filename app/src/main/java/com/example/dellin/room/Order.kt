@@ -33,7 +33,7 @@ class HobbiesConverter {
     fun toTerminals(data: TerminalsParsed): String {
         return data.pack()
     }
-    fun unpack(string: String):TerminalsParsed
+    private fun unpack(string: String):TerminalsParsed
     {
         val arr= string.split(",")
         return TerminalsParsed(arr[0].toInt(),arr[1],arr[2],arr[3],arr[4],arr[5].toBoolean(),

@@ -10,6 +10,7 @@ import com.example.dellin.Dellin
 import com.example.dellin.MainViewModel
 import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
+import com.example.dellin.ui.main.MainFragment
 import com.example.dellin.ui.main.SecondFragmentDirections
 import java.util.*
 import kotlin.math.pow
@@ -39,8 +40,8 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
             val action = SecondFragmentDirections.clicked()
             when(page)
             {
-                0->MainViewModel.firstTerminals=amount
-                1->MainViewModel.secondTerminals=amount
+                0->MainFragment.firstTerminals=amount
+                1->MainFragment.secondTerminals=amount
             }// TODO сделать аргументами
             it.findNavController().navigate(action)
 

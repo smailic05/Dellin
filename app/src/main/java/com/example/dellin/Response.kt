@@ -280,10 +280,14 @@ data class WorktableItem(
 		fun undoConvert(worktableItem: String):WorktableItem
 		{
 			val items = worktableItem.split(",")
-			return WorktableItem(
-				items[0], items[1], items[2], items[3], items[4], items[5],
-				items[6], items[7], items[8]
-			)
+			if (items.size>8)
+				return WorktableItem(
+					items[0], items[1], items[2], items[3], items[4], items[5],
+					items[6], items[7], items[8]
+				)
+			else
+				return WorktableItem("","","","",
+					"","","","","")
 		}
 	}
 }

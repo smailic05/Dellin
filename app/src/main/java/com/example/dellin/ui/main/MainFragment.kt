@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.dellin.*
 import com.example.dellin.databinding.MainFragmentBinding
@@ -50,39 +49,39 @@ class MainFragment : Fragment(),AppBarInterface {
             findNavController().navigate(action)
         }
         binding.save.setOnClickListener {
-            model.saveOrder()
+            model.saveOrder(firstTerminals, secondTerminals)
         }
 
-        if (MainViewModel.firstTerminals!=null)
+        if (firstTerminals!=null)
             {
-                binding.textNameOut.text = MainViewModel.firstTerminals?.name
-                binding.addressOut.text = MainViewModel.firstTerminals?.address
-                binding.latitudeOut.text = MainViewModel.firstTerminals?.latitude
-                binding.longitudeOut.text = MainViewModel.firstTerminals?.longitude
-                binding.receiveCargoOut.text = MainViewModel.firstTerminals?.receiveCargo.toString()
-                binding.giveoutCargoOut.text = MainViewModel.firstTerminals?.giveoutCargo.toString()
-                binding.defaultOut.text = MainViewModel.firstTerminals?.defaultTerminal.toString()
-                binding.worktable.text=MainViewModel.firstTerminals?.worktable
-                binding.imageOut.load(MainViewModel.firstTerminals?.maps)
-                MainViewModel.firstVisibility = VISIBLE
+                binding.textNameOut.text = firstTerminals?.name
+                binding.addressOut.text = firstTerminals?.address
+                binding.latitudeOut.text = firstTerminals?.latitude
+                binding.longitudeOut.text = firstTerminals?.longitude
+                binding.receiveCargoOut.text = firstTerminals?.receiveCargo.toString()
+                binding.giveoutCargoOut.text = firstTerminals?.giveoutCargo.toString()
+                binding.defaultOut.text = firstTerminals?.defaultTerminal.toString()
+                parseWorktableOut(Worktables.undoConvert(firstTerminals?.worktable!!).worktable?.get(0))
+                binding.imageOut.load(firstTerminals?.maps)
+                firstVisibility = VISIBLE
             }
-        if (MainViewModel.secondTerminals!=null)
+        if (secondTerminals!=null)
         {
-            binding.nameIn.text = MainViewModel.secondTerminals?.name
-            binding.addressIn.text = MainViewModel.secondTerminals?.address
-            binding.latitudeIn.text = MainViewModel.secondTerminals?.latitude
-            binding.longitudeIn.text = MainViewModel.secondTerminals?.longitude
-            binding.receiveCargoIn.text = MainViewModel.secondTerminals?.receiveCargo.toString()
-            binding.giveoutCargoIn.text = MainViewModel.secondTerminals?.giveoutCargo.toString()
-            binding.defaultIn.text = MainViewModel.secondTerminals?.defaultTerminal.toString()
-            binding.worktableIn.text=MainViewModel.secondTerminals?.worktable
-            binding.imageOut.load(MainViewModel.secondTerminals?.maps)
-            MainViewModel.secondVisibility = VISIBLE
+            binding.nameIn.text = secondTerminals?.name
+            binding.addressIn.text = secondTerminals?.address
+            binding.latitudeIn.text = secondTerminals?.latitude
+            binding.longitudeIn.text = secondTerminals?.longitude
+            binding.receiveCargoIn.text = secondTerminals?.receiveCargo.toString()
+            binding.giveoutCargoIn.text = secondTerminals?.giveoutCargo.toString()
+            binding.defaultIn.text = secondTerminals?.defaultTerminal.toString()
+            parseWorktableIn(Worktables.undoConvert(secondTerminals?.worktable!!).worktable?.get(0))
+            binding.imageIn.load(secondTerminals?.maps)
+            secondVisibility = VISIBLE
         }
 
-        binding.outGroup.visibility=MainViewModel.firstVisibility
-        binding.inGroup.visibility=MainViewModel.secondVisibility
-        if (MainViewModel.firstVisibility== VISIBLE&& MainViewModel.secondVisibility== VISIBLE)
+        binding.outGroup.visibility=firstVisibility
+        binding.inGroup.visibility=secondVisibility
+        if (firstVisibility== VISIBLE&& secondVisibility== VISIBLE)
             binding.save.isEnabled=true
 
     }
@@ -94,9 +93,37 @@ class MainFragment : Fragment(),AppBarInterface {
     }
 
     override fun hideAppBar() {
-
     }
 
     override fun showAppBar() {
+    }
+    companion object{
+        var firstVisibility:Int= INVISIBLE
+        var secondVisibility:Int= INVISIBLE
+        var firstTerminals:TerminalsParsed?=null
+        var secondTerminals:TerminalsParsed?=null
+    }
+
+    private fun parseWorktableOut(worktables: WorktableItem?)
+    {
+        binding.worktable.text=worktables?.department
+        binding.monday.text=worktables?.monday
+        binding.tuesday.text=worktables?.tuesday
+        binding.wednesday.text=worktables?.wednesday
+        binding.thursday.text=worktables?.thursday
+        binding.friday.text=worktables?.friday
+        binding.saturday.text=worktables?.saturday
+        binding.sunday.text=worktables?.sunday
+    }
+    private fun parseWorktableIn(worktables: WorktableItem?)
+    {
+        binding.worktableIn.text=worktables?.department
+        binding.mondayIn.text=worktables?.monday
+        binding.tuesdayIn.text=worktables?.tuesday
+        binding.wednesdayIn.text=worktables?.wednesday
+        binding.thursdayIn.text=worktables?.thursday
+        binding.fridayIn.text=worktables?.friday
+        binding.saturdayIn.text=worktables?.saturday
+        binding.sundayIn.text=worktables?.sunday
     }
 }

@@ -19,7 +19,6 @@ class TerminalsRepository {
                             terminal.jsonMemberDefault,terminal.worktables?.convert(),
                             terminal.maps?.width?.jsonMember640?.height?.jsonMember640?.url
                         ) )
-
                         //TODO convert to liveData
                     }
         return listOfTerminals.toTypedArray()

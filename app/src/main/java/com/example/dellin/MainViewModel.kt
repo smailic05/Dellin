@@ -1,7 +1,6 @@
 package com.example.dellin
 
 
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,12 +18,7 @@ class MainViewModel : ViewModel() {
     private val db=Dellin.instance?.getDatabase()
     var array:Array<TerminalsParsed?>?=null
 
-    companion object{
-        var firstVisibility:Int= View.INVISIBLE
-        var secondVisibility:Int= View.INVISIBLE
-        var firstTerminals:TerminalsParsed?=null
-        var secondTerminals:TerminalsParsed?=null
-    }// TODO переместить в mainfragment
+// TODO переместить в mainfragment
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
@@ -40,7 +34,7 @@ class MainViewModel : ViewModel() {
     private fun save(arr:Array<TerminalsParsed>) {
         roomRepository.insertIntoDatabase(arr)
     }
-    fun saveOrder()=viewModelScope.launch(Dispatchers.IO) {
+    fun saveOrder(firstTerminals: TerminalsParsed?, secondTerminals: TerminalsParsed?) =viewModelScope.launch(Dispatchers.IO) {
         db?.terminalsDao()?.insertOrder(Order( firstTerminals!!,secondTerminals!!))
 
     }
