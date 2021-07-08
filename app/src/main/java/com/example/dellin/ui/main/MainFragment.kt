@@ -65,8 +65,7 @@ class MainFragment : Fragment(),AppBarInterface {
                 binding.giveoutCargoOut.text = firstTerminals?.giveoutCargo.toString()
                 binding.defaultOut.text = firstTerminals?.defaultTerminal.toString()
                 val work=Worktables.undoConvert(firstTerminals?.worktable!!)
-                parseWorktableOut(work.worktable?.get(0))
-                val disposable=binding.imageOut.load(firstTerminals?.maps){
+                binding.imageOut.load(firstTerminals?.maps){
                     crossfade(true)
                     placeholder(R.drawable.no_image)
                     transformations(CircleCropTransformation())
@@ -84,12 +83,13 @@ class MainFragment : Fragment(),AppBarInterface {
             binding.receiveCargoIn.text = secondTerminals?.receiveCargo.toString()
             binding.giveoutCargoIn.text = secondTerminals?.giveoutCargo.toString()
             binding.defaultIn.text = secondTerminals?.defaultTerminal.toString()
-            parseWorktableIn(Worktables.undoConvert(secondTerminals?.worktable!!).worktable?.get(0))
+            val work=Worktables.undoConvert(secondTerminals?.worktable!!)
             binding.imageIn.load(secondTerminals?.maps){
                 crossfade(true)
                 placeholder(R.drawable.no_image)
                 transformations(CircleCropTransformation())
             }
+            binding.viewPagerMainIn.adapter=MainViewPagerAdapter(work)
             secondVisibility = VISIBLE
         }
 
@@ -118,26 +118,5 @@ class MainFragment : Fragment(),AppBarInterface {
         var secondTerminals:TerminalsParsed?=null
     }
 
-    private fun parseWorktableOut(worktables: WorktableItem?)
-    {
-        binding.worktable.text=worktables?.department
-        binding.monday.text=worktables?.monday
-        binding.tuesday.text=worktables?.tuesday
-        binding.wednesday.text=worktables?.wednesday
-        binding.thursday.text=worktables?.thursday
-        binding.friday.text=worktables?.friday
-        binding.saturday.text=worktables?.saturday
-        binding.sunday.text=worktables?.sunday
-    }
-    private fun parseWorktableIn(worktables: WorktableItem?)
-    {
-        binding.worktableIn.text=worktables?.department
-        binding.mondayIn.text=worktables?.monday
-        binding.tuesdayIn.text=worktables?.tuesday
-        binding.wednesdayIn.text=worktables?.wednesday
-        binding.thursdayIn.text=worktables?.thursday
-        binding.fridayIn.text=worktables?.friday
-        binding.saturdayIn.text=worktables?.saturday
-        binding.sundayIn.text=worktables?.sunday
-    }
+
 }
