@@ -97,6 +97,7 @@ data class Worktables(
 			val worktableItem= mutableListOf<WorktableItem>()
 			val temp=worktable.split("&")
 			for (item in temp)
+				if(item!="")
 				worktableItem.add(WorktableItem.undoConvert(item))
 			return Worktables(worktableItem)
 		}
@@ -279,14 +280,14 @@ data class WorktableItem(
 	companion object {
 		fun undoConvert(worktableItem: String):WorktableItem
 		{
-			val items = worktableItem.split(",")
-			if (items.size>8)
-				return WorktableItem(
+			val items = worktableItem.split("|")
+			return if (items.size>8)
+				WorktableItem(
 					items[0], items[1], items[2], items[3], items[4], items[5],
 					items[6], items[7], items[8]
 				)
 			else
-				return WorktableItem("","","","",
+				WorktableItem("","","","",
 					"","","","","")
 		}
 	}

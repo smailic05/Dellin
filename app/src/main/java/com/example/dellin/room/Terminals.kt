@@ -7,14 +7,14 @@ import java.util.*
 
 fun WorktableItem.convert():String
 {
-    return "$department,$monday,$tuesday,$wednesday,$thursday,$friday,$saturday,$sunday,$timetable"
+    return "$department|$monday|$tuesday|$wednesday|$thursday|$friday|$saturday|$sunday|$timetable"
 }
 fun Worktables.convert():String
 {
     var temp=""
     if (worktable != null) {
         for (item in worktable)
-            temp+=item?.convert()+"&"
+            temp+="&"+item?.convert()
     }
     return temp
 }

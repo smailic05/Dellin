@@ -49,15 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addressIn"
         tools:text="latitude" />
 
-    <TextView
-        android:id="@+id/worktableIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/mondayIn"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:text="worktable" />
+
 
     <TextView
         android:id="@+id/defaultIn"
@@ -368,7 +360,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/saturday"
         tools:text="sunday" />
-
+    <TextView
+        android:id="@+id/worktableIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/mondayIn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        tools:text="worktable" />
     <TextView
         android:id="@+id/mondayIn"
         android:layout_width="0dp"
@@ -443,6 +443,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/saturdayIn"
         tools:text="sunday" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerMain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/outButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

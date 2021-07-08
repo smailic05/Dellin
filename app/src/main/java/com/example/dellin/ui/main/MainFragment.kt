@@ -9,8 +9,11 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.navigation.fragment.findNavController
 import coil.load
+import coil.size.Scale
+import coil.transform.CircleCropTransformation
 import com.example.dellin.*
 import com.example.dellin.databinding.MainFragmentBinding
+import com.example.dellin.ui.main.adapters.MainViewPagerAdapter
 
 class MainFragment : Fragment(),AppBarInterface {
 
@@ -61,8 +64,15 @@ class MainFragment : Fragment(),AppBarInterface {
                 binding.receiveCargoOut.text = firstTerminals?.receiveCargo.toString()
                 binding.giveoutCargoOut.text = firstTerminals?.giveoutCargo.toString()
                 binding.defaultOut.text = firstTerminals?.defaultTerminal.toString()
-                parseWorktableOut(Worktables.undoConvert(firstTerminals?.worktable!!).worktable?.get(0))
-                binding.imageOut.load(firstTerminals?.maps)
+                val work=Worktables.undoConvert(firstTerminals?.worktable!!)
+                parseWorktableOut(work.worktable?.get(0))
+                val disposable=binding.imageOut.load(firstTerminals?.maps){
+                    crossfade(true)
+                    placeholder(R.drawable.no_image)
+                    transformations(CircleCropTransformation())
+                    scale(Scale.FILL)
+                }
+                binding.viewPagerMain.adapter=MainViewPagerAdapter(work)
                 firstVisibility = VISIBLE
             }
         if (secondTerminals!=null)
@@ -75,7 +85,11 @@ class MainFragment : Fragment(),AppBarInterface {
             binding.giveoutCargoIn.text = secondTerminals?.giveoutCargo.toString()
             binding.defaultIn.text = secondTerminals?.defaultTerminal.toString()
             parseWorktableIn(Worktables.undoConvert(secondTerminals?.worktable!!).worktable?.get(0))
-            binding.imageIn.load(secondTerminals?.maps)
+            binding.imageIn.load(secondTerminals?.maps){
+                crossfade(true)
+                placeholder(R.drawable.no_image)
+                transformations(CircleCropTransformation())
+            }
             secondVisibility = VISIBLE
         }
 
