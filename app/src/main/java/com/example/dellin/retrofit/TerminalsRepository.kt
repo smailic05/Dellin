@@ -1,6 +1,7 @@
 package com.example.dellin.retrofit
 import com.example.dellin.TerminalsParsed
-import com.example.dellin.convert
+import com.example.dellin.WorktableItem
+import com.example.dellin.Worktables
 
 class TerminalsRepository {
     var terminal: TerminalApi = RetrofitBuilder.apiService
@@ -22,5 +23,18 @@ class TerminalsRepository {
                         //TODO convert to liveData
                     }
         return listOfTerminals.toTypedArray()
+    }
+    fun WorktableItem.convert():String
+    {
+        return "$department|$monday|$tuesday|$wednesday|$thursday|$friday|$saturday|$sunday|$timetable"
+    }
+    fun Worktables.convert():String
+    {
+        var temp=""
+        if (worktable != null) {
+            for (item in worktable)
+                temp+="&"+item?.convert()
+        }
+        return temp
     }
 }

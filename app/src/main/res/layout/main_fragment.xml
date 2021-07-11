@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="longitudeIn,receiveCargoIn,defaultIn,addressIn,nameIn,giveoutCargoIn,latitudeIn"
+        app:constraint_referenced_ids="addressIn,nameIn,locationIn,imageIn"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
@@ -30,36 +30,15 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/receiveCargoIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/giveoutCargoIn"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/longitudeIn"
-        tools:text="receiveCargo" />
-
-    <TextView
-        android:id="@+id/latitudeIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/longitudeIn"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/addressIn"
-        tools:text="latitude" />
-
-
-
-    <TextView
-        android:id="@+id/defaultIn"
+        android:id="@+id/locationIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/giveoutCargoIn"
-        tools:text="default" />
+        app:layout_constraintTop_toBottomOf="@+id/addressIn"
+        tools:text="latitude" />
+
 
     <TextView
         android:id="@+id/nameIn"
@@ -72,41 +51,22 @@
         tools:text="name" />
 
     <TextView
-        android:id="@+id/giveoutCargoIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/defaultIn"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/receiveCargoIn"
-        tools:text="giveoutCargo" />
-
-    <TextView
         android:id="@+id/addressIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/latitudeIn"
+        app:layout_constraintBottom_toTopOf="@+id/locationIn"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/nameIn"
         tools:text="address" />
 
-    <TextView
-        android:id="@+id/longitudeIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/receiveCargoIn"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/latitudeIn"
-        tools:text="longitude" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/outGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="defaultOut,textNameOut,receiveCargoOut,latitudeOut,giveoutCargoOut,longitudeOut,addressOut,imageOut"
+        app:constraint_referenced_ids="textNameOut,locationOut,addressOut,imageOut"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
@@ -125,62 +85,22 @@
         android:id="@+id/addressOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/latitudeOut"
+        app:layout_constraintBottom_toTopOf="@+id/locationOut"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textNameOut"
         tools:text="address" />
 
     <TextView
-        android:id="@+id/latitudeOut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/longitudeOut"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/addressOut"
-        tools:text="latitude" />
-
-    <TextView
-        android:id="@+id/longitudeOut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/receiveCargoOut"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/latitudeOut"
-        tools:text="longitude" />
-
-    <TextView
-        android:id="@+id/receiveCargoOut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/giveoutCargoOut"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/longitudeOut"
-        tools:text="receiveCargo" />
-
-    <TextView
-        android:id="@+id/giveoutCargoOut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/defaultOut"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/receiveCargoOut"
-        tools:text="giveoutCargo" />
-
-    <TextView
-        android:id="@+id/defaultOut"
+        android:id="@+id/locationOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/giveoutCargoOut"
-        tools:text="default" />
+        app:layout_constraintTop_toBottomOf="@+id/addressOut"
+        tools:text="latitude" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

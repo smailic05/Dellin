@@ -4,10 +4,9 @@ package com.example.dellin.ui.main
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.dellin.MainViewModel
+import com.example.dellin.viewModel.MainViewModel
 import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.databinding.RecyclerLayoutBinding

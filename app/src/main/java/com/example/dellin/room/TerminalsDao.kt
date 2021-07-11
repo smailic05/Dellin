@@ -15,7 +15,7 @@ interface TerminalsDao {
         @Query("SELECT * FROM terminalsparsed ORDER BY name ASC")
         fun getAllTerminals(): Array<TerminalsParsed?>?
 
-        @Insert
+        @Insert(onConflict = OnConflictStrategy.IGNORE)
         fun insertOrder(order: Order)
 
         @Query("SELECT * FROM orders")

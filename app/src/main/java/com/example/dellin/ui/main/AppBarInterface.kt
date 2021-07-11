@@ -1,4 +1,4 @@
-package com.example.dellin
+package com.example.dellin.ui.main
 
 interface AppBarInterface {
     fun hideAppBar()

@@ -1,4 +1,4 @@
-package com.example.dellin
+package com.example.dellin.ui.main
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.dellin.Dellin
+import com.example.dellin.R
 import com.example.dellin.databinding.MainActivityBinding
 import com.google.android.gms.location.*
 
@@ -30,17 +31,14 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = MainActivityBinding.inflate(layoutInflater)
-        val model: MainViewModel by viewModels()
         val view = binding.root
         setContentView(view)
         setupNavigation()
         fusedLocationClient=LocationServices.getFusedLocationProviderClient(this)
         checkPermission()
         fusedLocationClient.lastLocation.addOnSuccessListener {
-            Dellin.location=it
-            model.createRequest()
+            Dellin.location =it
         }
 
     }
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(this, "Require permission", Toast.LENGTH_SHORT).show()
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -64,7 +61,7 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
-        return true
+        return false
     }
     private fun setupNavigation()
     {

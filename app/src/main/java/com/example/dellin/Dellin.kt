@@ -13,7 +13,8 @@ class Dellin:Application() {
         var instance: Dellin? = null
     }
 
-    private var database: AppDatabase? = null
+    var database: AppDatabase? = null
+    private set
 
     override fun onCreate() {
         super.onCreate()
@@ -22,11 +23,6 @@ class Dellin:Application() {
             .build()
     }
 
-    fun getInstance(): Dellin? {
-        return instance
-    }
 
-    fun getDatabase(): AppDatabase? {
-        return database
-    }
+
 }

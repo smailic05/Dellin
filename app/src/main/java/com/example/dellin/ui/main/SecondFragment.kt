@@ -6,21 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager2.widget.ViewPager2
-import com.example.dellin.AppBarInterface
-import com.example.dellin.MainViewModel
 import com.example.dellin.databinding.SecondFragmentBinding
 import com.example.dellin.ui.main.adapters.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
-class SecondFragment: Fragment(),AppBarInterface {
+class SecondFragment: Fragment(), AppBarInterface {
     private var _binding: SecondFragmentBinding? = null
     private val binding get() = _binding!!
     private val args: SecondFragmentArgs by navArgs()
-    private var appBar:AppBarInterface?=null
+    private var appBar: AppBarInterface?=null
     override fun onAttach(context: Context) {
         super.onAttach(context)
         appBar=context as AppBarInterface

@@ -1,9 +1,11 @@
-package com.example.dellin
+package com.example.dellin.viewModel
 
 
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dellin.Dellin
+import com.example.dellin.TerminalsParsed
 import com.example.dellin.retrofit.TerminalsRepository
 import com.example.dellin.room.Order
 import com.example.dellin.room.RoomRepository
@@ -15,15 +17,13 @@ class MainViewModel : ViewModel() {
 
     private val repository: TerminalsRepository = TerminalsRepository()
     private val roomRepository= RoomRepository()
-    private val db=Dellin.instance?.getDatabase()
+    private val db= Dellin.instance?.database
     var array:Array<TerminalsParsed?>?=null
 
-// TODO переместить в mainfragment
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
-            val arr=repository.createRequest()
-            save(arr)
+            save(repository.createRequest())
             updateArray()
         }
         catch (exception: Exception) {
@@ -38,7 +38,7 @@ class MainViewModel : ViewModel() {
         db?.terminalsDao()?.insertOrder(Order( firstTerminals!!,secondTerminals!!))
 
     }
-    fun updateArray()
+    private fun updateArray()
     {
         array= roomRepository.getAllTerminals()
     }
