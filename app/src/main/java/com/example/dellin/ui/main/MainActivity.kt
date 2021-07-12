@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
         val navController = host.navController
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
+
     }
 
     override fun hideAppBar() {

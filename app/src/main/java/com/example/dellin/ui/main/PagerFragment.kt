@@ -35,6 +35,7 @@ class PagerFragment(private val position: Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         val array = model.array
+        // Заполняем контейнер нужными данными и отправляем их в адаптер
         when (position) {
             0 -> {
                 if (array != null)
@@ -56,6 +57,7 @@ class PagerFragment(private val position: Int) : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         val myActionMenuItem = menu.findItem(R.id.search)
         val searchView=myActionMenuItem.actionView as SearchView
+        //Реализация поиска
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!=null)
@@ -69,10 +71,12 @@ class PagerFragment(private val position: Int) : Fragment() {
                 return true
             }
         })
+        //Сортировка по алфавиту
         menu.findItem(R.id.sort).setOnMenuItemClickListener {
             (binding.recycler.adapter as RecyclerAdapter).sort()
             true
         }
+        //Сортировка по удаленности
         menu.findItem(R.id.sortLocation).setOnMenuItemClickListener {
             (binding.recycler.adapter as RecyclerAdapter).sortByLocation()
             true

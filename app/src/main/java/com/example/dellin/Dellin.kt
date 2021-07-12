@@ -9,7 +9,9 @@ import com.example.dellin.room.AppDatabase
 class Dellin:Application() {
 
     companion object{
+
         var location: Location?=null
+        //Чтобы иметь единственный экземпляр БД
         var instance: Dellin? = null
     }
 

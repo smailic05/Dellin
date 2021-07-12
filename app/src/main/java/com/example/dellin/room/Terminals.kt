@@ -7,7 +7,7 @@ import java.util.*
 
 
 
-
+//Класс сохраняемый в базу данных
 @Entity(tableName = "terminalsparsed")
 data class TerminalsParsed(@PrimaryKey
                            @ColumnInfo(name = "id")

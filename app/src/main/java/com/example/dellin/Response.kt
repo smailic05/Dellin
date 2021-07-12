@@ -2,6 +2,9 @@ package com.example.dellin
 
 import com.google.gson.annotations.SerializedName
 
+
+///Классы для получения данных из Сервера
+
 data class ResponseTerminal(
 	@field:SerializedName("city")
 	val city: List<CityItem?>? = null

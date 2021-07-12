@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -36,13 +37,16 @@ class MainFragment : Fragment() {
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         appBar?.hideAppBar()
+        (activity as AppCompatActivity).supportActionBar?.title=null
         val view = binding.root
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Запрашиваем данные с сервера
         model.createRequest()
+        // Для кнопок создаем лисенеры
         binding.outButton.setOnClickListener {
             binding.outButton.setOnClickListener(null)
             val action=MainFragmentDirections.out()
@@ -58,7 +62,7 @@ class MainFragment : Fragment() {
         binding.save.setOnClickListener {
             model.saveOrder(firstTerminals, secondTerminals)
         }
-
+//  Проверяем Данные о терминалах и если они есть, то виводим их
         if (firstTerminals!=null)
             {
                 binding.textNameOut.text = firstTerminals?.name
@@ -112,6 +116,7 @@ class MainFragment : Fragment() {
         var secondTerminals:TerminalsParsed?=null
     }
 
+    //Функция определения удаленности от пользователя терминала
     private fun getDistance(main_Latitude:Double?, main_Longitude:Double?, sub_Latitude:Double?, sub_Longitude:Double?):Double
     {
         val oldlocation = Location("")

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dellin.R
 import com.example.dellin.Worktables
 
+
 class MainViewPagerAdapter(private val worktables: Worktables) : RecyclerView.Adapter<MainViewPagerAdapter.ViewHolderPager>() {
     class ViewHolderPager(view: View): RecyclerView.ViewHolder(view) {
         val worktable: TextView = view.findViewById(R.id.worktableIn)

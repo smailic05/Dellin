@@ -2,7 +2,7 @@ package com.example.dellin.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+//Builder для создания экземпляра класса Retrofit
 object RetrofitBuilder {
     private const val BASE_URL = "https://api.dellin.ru"
 

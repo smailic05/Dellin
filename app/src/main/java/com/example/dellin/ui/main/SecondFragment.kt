@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.dellin.databinding.SecondFragmentBinding
@@ -25,7 +26,7 @@ class SecondFragment: Fragment(), AppBarInterface {
         savedInstanceState: Bundle?
     ): View {
         _binding = SecondFragmentBinding.inflate(inflater, container, false)
-
+        (activity as AppCompatActivity).supportActionBar?.title="Выберите терминал"
         val currentTab:Int=args.chooseTab
         binding.viewPager.adapter=ViewPagerFragmentAdapter(requireActivity())
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

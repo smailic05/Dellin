@@ -18,6 +18,7 @@ class MainViewModel : ViewModel() {
     private val repository: TerminalsRepository = TerminalsRepository()
     private val roomRepository= RoomRepository()
     private val db= Dellin.instance?.database
+    //массив терминалов  из базы данных
     var array:Array<TerminalsParsed?>?=null
 
 

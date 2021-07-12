@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.example.dellin.TerminalsParsed
-
+// Класс заказов, сохраняемых в БД
 @Entity(tableName = "orders")
 data class Order (@PrimaryKey(autoGenerate = true)
                   val id:Int,
@@ -22,7 +22,7 @@ data class Order (@PrimaryKey(autoGenerate = true)
         var idDatabase=0
     }
 }
-
+// Конвертер класса Order для сохранения в БД
 class HobbiesConverter {
     @TypeConverter
     fun fromTerminals(data: String): TerminalsParsed {

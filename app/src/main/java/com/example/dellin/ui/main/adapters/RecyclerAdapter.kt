@@ -65,6 +65,7 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
         }
         notifyDataSetChanged()
     }
+    //Функция сортировки терминалов по алфавиту
     fun sort() {
         dataSet.sortBy{it?.name}
         if (isSortedByAbc)
@@ -78,6 +79,7 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
             notifyDataSetChanged()
         }
     }
+    //Функция сортировки терминалов по удаленности
     fun sortByLocation(){
         if (Dellin.location!=null)
         dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(Dellin.location!!.longitude))?.pow(2)
