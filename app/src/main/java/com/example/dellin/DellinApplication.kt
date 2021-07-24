@@ -6,13 +6,13 @@ import androidx.room.Room
 import com.example.dellin.room.AppDatabase
 
 
-class Dellin:Application() {
+class DellinApplication:Application() {
 
     companion object{
 
         var location: Location?=null
         //Чтобы иметь единственный экземпляр БД
-        var instance: Dellin? = null
+        var instance: DellinApplication? = null
     }
 
     var database: AppDatabase? = null

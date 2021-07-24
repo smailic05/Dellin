@@ -34,7 +34,7 @@ class PagerFragment(private val position: Int) : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        val array = model.array
+        val array = model.arrayOfTerminalsParsed
         // Заполняем контейнер нужными данными и отправляем их в адаптер
         when (position) {
             0 -> {

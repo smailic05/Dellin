@@ -4,7 +4,7 @@ package com.example.dellin.viewModel
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dellin.Dellin
+import com.example.dellin.DellinApplication
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.retrofit.TerminalsRepository
 import com.example.dellin.room.Order
@@ -13,34 +13,34 @@ import com.example.dellin.room.RoomRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel: ViewModel() {
 
-    private val repository: TerminalsRepository = TerminalsRepository()
+    private val repositoryRetrofit: TerminalsRepository = TerminalsRepository()
     private val roomRepository= RoomRepository()
-    private val db= Dellin.instance?.database
+    private val db= DellinApplication.instance?.database
     //массив терминалов  из базы данных
-    var array:Array<TerminalsParsed?>?=null
+    var arrayOfTerminalsParsed:Array<TerminalsParsed?>?=null
 
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
-            save(repository.createRequest())
-            updateArray()
+            saveTerminalsToDatabase(repositoryRetrofit.createRequest())
+            updateArrayOfTerminals()
         }
         catch (exception: Exception) {
-            Toast.makeText(Dellin.instance, exception.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(DellinApplication.instance, exception.message, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun save(arr:Array<TerminalsParsed>) {
+    private fun saveTerminalsToDatabase(arr:Array<TerminalsParsed>) {
         roomRepository.insertIntoDatabase(arr)
     }
     fun saveOrder(firstTerminals: TerminalsParsed?, secondTerminals: TerminalsParsed?) =viewModelScope.launch(Dispatchers.IO) {
         db?.terminalsDao()?.insertOrder(Order( firstTerminals!!,secondTerminals!!))
 
     }
-    private fun updateArray()
+    private fun updateArrayOfTerminals()
     {
-        array= roomRepository.getAllTerminals()
+        arrayOfTerminalsParsed= roomRepository.getAllTerminals()
     }
 }

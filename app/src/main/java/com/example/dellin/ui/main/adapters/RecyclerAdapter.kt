@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dellin.Dellin
+import com.example.dellin.DellinApplication
 import com.example.dellin.R
 import com.example.dellin.TerminalsParsed
 import com.example.dellin.ui.main.MainFragment
@@ -81,9 +81,9 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, privat
     }
     //Функция сортировки терминалов по удаленности
     fun sortByLocation(){
-        if (Dellin.location!=null)
-        dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(Dellin.location!!.longitude))?.pow(2)
-            ?.plus((it.latitude?.toDouble()?.minus(Dellin.location!!.latitude))?.pow(2)!!))?.pow(0.5) }
+        if (DellinApplication.location!=null)
+        dataSet.sortBy { ((it?.longitude?.toDouble()?.minus(DellinApplication.location!!.longitude))?.pow(2)
+            ?.plus((it.latitude?.toDouble()?.minus(DellinApplication.location!!.latitude))?.pow(2)!!))?.pow(0.5) }
         notifyDataSetChanged()
         isSortedByAbc=false
     }

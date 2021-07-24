@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/inButton"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="140dp"
@@ -33,6 +33,7 @@
         android:id="@+id/locationIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -152,7 +153,7 @@
 
     <Button
         android:id="@+id/outButton"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="140dp"

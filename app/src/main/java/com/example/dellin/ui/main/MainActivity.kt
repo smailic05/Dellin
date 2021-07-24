@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.dellin.Dellin
+import com.example.dellin.DellinApplication
 import com.example.dellin.R
 import com.example.dellin.databinding.MainActivityBinding
 import com.google.android.gms.location.*
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), AppBarInterface {
         fusedLocationClient=LocationServices.getFusedLocationProviderClient(this)
         checkPermission()
         fusedLocationClient.lastLocation.addOnSuccessListener {
-            Dellin.location =it
+            DellinApplication.location =it
         }
 
     }

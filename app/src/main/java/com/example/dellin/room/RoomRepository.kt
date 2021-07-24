@@ -1,11 +1,11 @@
 package com.example.dellin.room
 
 
-import com.example.dellin.Dellin
+import com.example.dellin.DellinApplication
 import com.example.dellin.TerminalsParsed
 
 class RoomRepository {
-    private val db= Dellin.instance?.database
+    private val db= DellinApplication.instance?.database
     fun insertIntoDatabase( arr:Array<TerminalsParsed>){
         db?.terminalsDao()?.insert(*arr)
     }

@@ -67,7 +67,7 @@ class MainFragment : Fragment() {
             {
                 binding.textNameOut.text = firstTerminals?.name
                 binding.addressOut.text = firstTerminals?.address
-                binding.locationOut.text = getDistance(Dellin.location?.latitude,Dellin.location?.longitude, firstTerminals?.latitude?.toDouble(),firstTerminals?.longitude?.toDouble()).toString()
+                binding.locationOut.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.longitude, firstTerminals?.latitude?.toDouble(),firstTerminals?.longitude?.toDouble()).toString()
                 val work=Worktables.undoConvert(firstTerminals?.worktable!!)
                 binding.imageOut.load(firstTerminals?.maps){
                     crossfade(true)
@@ -84,7 +84,7 @@ class MainFragment : Fragment() {
         {
             binding.nameIn.text = secondTerminals?.name
             binding.addressIn.text = secondTerminals?.address
-            binding.locationIn.text = getDistance(Dellin.location?.latitude,Dellin.location?.longitude, secondTerminals?.latitude?.toDouble(),secondTerminals?.longitude?.toDouble()).toString()
+            binding.locationIn.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.longitude, secondTerminals?.latitude?.toDouble(),secondTerminals?.longitude?.toDouble()).toString()
             val work=Worktables.undoConvert(secondTerminals?.worktable!!)
             binding.imageIn.load(secondTerminals?.maps){
                 crossfade(true)
