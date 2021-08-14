@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dellin.DellinApplication
@@ -15,7 +16,9 @@ import java.util.*
 import kotlin.math.pow
 
 class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>,
-                      private val page:Int):
+                      private val page:Int, private val firstTerminal: MutableLiveData<TerminalsParsed?>,
+                      private val secondTerminal: MutableLiveData<TerminalsParsed?>
+):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     private val dataSetCopy= mutableListOf<TerminalsParsed?>()
     private var isSortedByAbc=true
@@ -40,8 +43,8 @@ class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>,
             val action = SecondFragmentDirections.clicked()
             when(page)
             {
-                0->MainFragment.firstTerminals=amount
-                1->MainFragment.secondTerminals=amount
+                0->firstTerminal.value=amount
+                1->secondTerminal.value=amount
             }
             it.findNavController().navigate(action)
 

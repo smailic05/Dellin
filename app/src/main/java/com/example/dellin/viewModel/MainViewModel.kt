@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Retrofit
+import java.io.IOException
 
 class MainViewModel: ViewModel() {
 
@@ -27,15 +28,22 @@ class MainViewModel: ViewModel() {
     val arrayOfTerminalsParsed
         get()=_arrayOfTerminalsParsed
 
+    var firstTerminal=MutableLiveData<TerminalsParsed?>()
+    var secondTerminal=MutableLiveData<TerminalsParsed?>()
+
+    private val _snackbar= MutableLiveData<String>()
+    val snackbar:LiveData<String>
+        get() = _snackbar
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
             updateArrayOfTerminals()
-            saveTerminalsToDatabase(repositoryRetrofit.createRequest())
+            val temp = repositoryRetrofit.createRequest()
+            saveTerminalsToDatabase(temp)
             updateArrayOfTerminals()
         }
         catch (exception: HttpException) {
-            Toast.makeText(DellinApplication.instance, exception.message, Toast.LENGTH_SHORT).show()
+            _snackbar.value="Error occurred"
         }
     }
 

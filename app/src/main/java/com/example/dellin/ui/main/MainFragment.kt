@@ -18,6 +18,7 @@ import com.example.dellin.*
 import com.example.dellin.databinding.MainFragmentBinding
 import com.example.dellin.ui.main.adapters.MainViewPagerAdapter
 import com.example.dellin.viewModel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainFragment : Fragment() {
@@ -46,6 +47,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //Запрашиваем данные с сервера
         model.createRequest()
+
+        model.snackbar.observe(viewLifecycleOwner,{
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+        })
         // Для кнопок создаем лисенеры
         binding.outButton.setOnClickListener {
             binding.outButton.setOnClickListener(null)
@@ -60,48 +65,48 @@ class MainFragment : Fragment() {
             findNavController().navigate(action)
         }
         binding.save.setOnClickListener {
-            model.saveOrder(firstTerminals, secondTerminals)
+            model.saveOrder(model.firstTerminal.value, model.secondTerminal.value)
         }
 //  Проверяем Данные о терминалах и если они есть, то виводим их
-        if (firstTerminals!=null)
-            {
-                binding.textNameOut.text = firstTerminals?.name
-                binding.addressOut.text = firstTerminals?.address
-                binding.locationOut.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.
-                longitude, firstTerminals?.latitude?.toDouble(),firstTerminals?.longitude?.toDouble()).toString()
-                val work=undoConvert(firstTerminals?.worktable!!)
-                binding.imageOut.load(firstTerminals?.maps){
-                    crossfade(true)
-                    placeholder(R.drawable.no_image)
-                    transformations(CircleCropTransformation())
-                    precision(Precision.EXACT)
-                    scale(Scale.FILL)
-                    error(R.drawable.no_image)
-                }
-                binding.viewPagerMain.adapter=MainViewPagerAdapter(work)
-                firstVisibility = VISIBLE
+        model.firstTerminal.observe(viewLifecycleOwner, {
+            binding.textNameOut.text = it?.name
+            binding.addressOut.text = it?.address
+            binding.locationOut.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.
+            longitude, it?.latitude?.toDouble(),it?.longitude?.toDouble()).toString()
+            val work=undoConvert(it?.worktable!!)
+            binding.imageOut.load(it.maps){
+                crossfade(true)
+                placeholder(R.drawable.no_image)
+                transformations(CircleCropTransformation())
+                precision(Precision.EXACT)
+                scale(Scale.FILL)
+                error(R.drawable.no_image)
             }
-        if (secondTerminals!=null)
-        {
-            binding.nameIn.text = secondTerminals?.name
-            binding.addressIn.text = secondTerminals?.address
+            binding.viewPagerMain.adapter=MainViewPagerAdapter(work)
+            binding.outGroup.visibility = VISIBLE
+            if (binding.inGroup.visibility== VISIBLE&& binding.outGroup.visibility== VISIBLE)
+                binding.save.isEnabled=true
+        })
+
+        model.secondTerminal.observe(viewLifecycleOwner,{
+            binding.nameIn.text = it?.name
+            binding.addressIn.text = it?.address
             binding.locationIn.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.
-            longitude, secondTerminals?.latitude?.toDouble(),secondTerminals?.longitude?.toDouble()).toString()
-            val work=undoConvert(secondTerminals?.worktable!!)
-            binding.imageIn.load(secondTerminals?.maps){
+            longitude, it?.latitude?.toDouble(),it?.longitude?.toDouble()).toString()
+            val work=undoConvert(it?.worktable!!)
+            binding.imageIn.load(it.maps){
                 crossfade(true)
                 placeholder(R.drawable.no_image)
                 error(R.drawable.no_image)
                 transformations(CircleCropTransformation())
             }
             binding.viewPagerMainIn.adapter=MainViewPagerAdapter(work)
-            secondVisibility = VISIBLE
-        }
+            binding.inGroup.visibility = VISIBLE
+            if (binding.inGroup.visibility== VISIBLE&& binding.outGroup.visibility== VISIBLE)
+                binding.save.isEnabled=true
+        })
 
-        binding.outGroup.visibility=firstVisibility
-        binding.inGroup.visibility=secondVisibility
-        if (firstVisibility== VISIBLE&& secondVisibility== VISIBLE)
-            binding.save.isEnabled=true
+
 
     }
 
@@ -111,12 +116,6 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    companion object{
-        var firstVisibility:Int= INVISIBLE
-        var secondVisibility:Int= INVISIBLE
-        var firstTerminals:TerminalsParsed?=null
-        var secondTerminals:TerminalsParsed?=null
-    }
 
     //Функция определения удаленности от пользователя терминала
     private fun getDistance(main_Latitude:Double?, main_Longitude:Double?, sub_Latitude:Double?, sub_Longitude:Double?):Double

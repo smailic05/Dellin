@@ -51,7 +51,8 @@ class PagerFragment(private val position: Int) : Fragment() {
                                 list.add(array[i])
                 }
             }
-            binding.recycler.adapter = RecyclerAdapter(list, position)
+            binding.recycler.adapter = RecyclerAdapter(list, position,
+                model.firstTerminal,model.secondTerminal)
         })
 
     }
