@@ -12,6 +12,8 @@ import com.example.dellin.room.RoomRepository
 //import com.example.dellin.room.Order
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import retrofit2.Retrofit
 
 class MainViewModel: ViewModel() {
 
@@ -24,10 +26,11 @@ class MainViewModel: ViewModel() {
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
         try {
+            updateArrayOfTerminals()
             saveTerminalsToDatabase(repositoryRetrofit.createRequest())
             updateArrayOfTerminals()
         }
-        catch (exception: Exception) {
+        catch (exception: HttpException) {
             Toast.makeText(DellinApplication.instance, exception.message, Toast.LENGTH_SHORT).show()
         }
     }
