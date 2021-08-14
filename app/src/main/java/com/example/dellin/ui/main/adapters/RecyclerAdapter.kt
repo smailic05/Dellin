@@ -14,7 +14,8 @@ import com.example.dellin.ui.main.SecondFragmentDirections
 import java.util.*
 import kotlin.math.pow
 
-class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>, private val page:Int):
+class RecyclerAdapter(private val dataSet: MutableList<TerminalsParsed?>,
+                      private val page:Int):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     private val dataSetCopy= mutableListOf<TerminalsParsed?>()
     private var isSortedByAbc=true

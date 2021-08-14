@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
                 binding.textNameOut.text = firstTerminals?.name
                 binding.addressOut.text = firstTerminals?.address
                 binding.locationOut.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.longitude, firstTerminals?.latitude?.toDouble(),firstTerminals?.longitude?.toDouble()).toString()
-                val work=Worktables.undoConvert(firstTerminals?.worktable!!)
+                val work=undoConvert(firstTerminals?.worktable!!)
                 binding.imageOut.load(firstTerminals?.maps){
                     crossfade(true)
                     placeholder(R.drawable.no_image)
@@ -85,7 +85,7 @@ class MainFragment : Fragment() {
             binding.nameIn.text = secondTerminals?.name
             binding.addressIn.text = secondTerminals?.address
             binding.locationIn.text = getDistance(DellinApplication.location?.latitude,DellinApplication.location?.longitude, secondTerminals?.latitude?.toDouble(),secondTerminals?.longitude?.toDouble()).toString()
-            val work=Worktables.undoConvert(secondTerminals?.worktable!!)
+            val work=undoConvert(secondTerminals?.worktable!!)
             binding.imageIn.load(secondTerminals?.maps){
                 crossfade(true)
                 placeholder(R.drawable.no_image)
@@ -133,5 +133,13 @@ class MainFragment : Fragment() {
         }
         return oldlocation.distanceTo(newlocation).toDouble()
     }
-
+    private fun undoConvert(worktable: String):Worktables
+    {
+        val worktableItem= mutableListOf<WorktableItem>()
+        val temp=worktable.split("&")
+        for (item in temp)
+            if(item!="")
+                worktableItem.add(WorktableItem.undoConvert(item))
+        return Worktables(worktableItem)
+    }
 }

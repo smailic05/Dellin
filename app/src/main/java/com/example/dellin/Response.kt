@@ -93,19 +93,7 @@ data class Worktables(
 	@field:SerializedName("worktable")
 	val worktable: List<WorktableItem?>? = null
 )
-{
-	companion object{
-		fun undoConvert(worktable: String):Worktables
-		{
-			val worktableItem= mutableListOf<WorktableItem>()
-			val temp=worktable.split("&")
-			for (item in temp)
-				if(item!="")
-				worktableItem.add(WorktableItem.undoConvert(item))
-			return Worktables(worktableItem)
-		}
-	}
-}
+
 
 data class Terminals(
 
