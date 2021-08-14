@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.example.dellin.Terminals
 import com.example.dellin.TerminalsParsed
 // Класс заказов, сохраняемых в БД
 @Entity(tableName = "orders")
@@ -35,8 +36,13 @@ class HobbiesConverter {
     }
     private fun unpack(string: String):TerminalsParsed
     {
-        val arr= string.split(",")
+        val arr= string.split("&")
         return TerminalsParsed(arr[0].toInt(),arr[1],arr[2],arr[3],arr[4],arr[5].toBoolean(),
             arr[6].toBoolean(),arr[7].toBoolean(),arr[8],arr[9])
+    }
+
+    fun TerminalsParsed.pack():String
+    {
+        return "$id&$name&$address&$latitude&$longitude&$receiveCargo&$giveoutCargo&$defaultTerminal&$worktable&$maps"
     }
 }

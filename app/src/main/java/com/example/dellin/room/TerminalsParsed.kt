@@ -30,14 +30,6 @@ data class TerminalsParsed(@PrimaryKey
                            var worktable: String?,
                            @ColumnInfo(name = "maps")
                             var maps: String?)
-{
-
-    fun pack():String
-    {
-        return "$id,$name,$address,$latitude,$longitude,$receiveCargo,$giveoutCargo,$defaultTerminal,$worktable,$maps"
-    }
-
-}
 
 
 

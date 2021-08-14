@@ -20,15 +20,14 @@ class TerminalsRepository {
                             terminal.jsonMemberDefault,terminal.worktables?.convert(),
                             terminal.maps?.width?.jsonMember640?.height?.jsonMember640?.url
                         ) )
-                        //TODO convert to liveData
                     }
         return listOfTerminals.toTypedArray()
     }
-    fun WorktableItem.convert():String
+    private fun WorktableItem.convert():String
     {
         return "$department|$monday|$tuesday|$wednesday|$thursday|$friday|$saturday|$sunday|$timetable"
     }
-    fun Worktables.convert():String
+    private fun Worktables.convert():String
     {
         var temp=""
         if (worktable != null) {
@@ -37,4 +36,5 @@ class TerminalsRepository {
         }
         return temp
     }
+
 }

@@ -6,6 +6,8 @@ import com.example.dellin.TerminalsParsed
 
 class RoomRepository {
     private val db= DellinApplication.instance?.database
+
+
     fun insertIntoDatabase( arr:Array<TerminalsParsed>){
         db?.terminalsDao()?.insert(*arr)
     }
