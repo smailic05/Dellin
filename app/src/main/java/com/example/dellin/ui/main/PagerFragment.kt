@@ -34,23 +34,26 @@ class PagerFragment(private val position: Int) : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        val array = model.arrayOfTerminalsParsed
-        // Заполняем контейнер нужными данными и отправляем их в адаптер
-        when (position) {
-            0 -> {
-                if (array != null)
-                    for (i in array.indices)
-                        if (array[i]?.giveoutCargo == true && array[i]?.giveoutCargo ==true)
-                            list.add(array[i])
+        model.arrayOfTerminalsParsed.observe(viewLifecycleOwner,{
+            val array = it
+            // Заполняем контейнер нужными данными и отправляем их в адаптер
+            when (position) {
+                0 -> {
+                    if (array != null)
+                        for (i in array.indices)
+                            if (array[i]?.giveoutCargo == true && array[i]?.giveoutCargo ==true)
+                                list.add(array[i])
+                }
+                1 -> {
+                    if (array != null)
+                        for (i in array.indices)
+                            if (array[i]?.receiveCargo == true)
+                                list.add(array[i])
+                }
             }
-            1 -> {
-                if (array != null)
-                    for (i in array.indices)
-                        if (array[i]?.receiveCargo == true)
-                            list.add(array[i])
-            }
-        }
-        binding.recycler.adapter = RecyclerAdapter(list, position)
+            binding.recycler.adapter = RecyclerAdapter(list, position)
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

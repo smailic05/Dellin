@@ -2,6 +2,8 @@ package com.example.dellin.viewModel
 
 
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dellin.DellinApplication
@@ -21,7 +23,9 @@ class MainViewModel: ViewModel() {
     private val roomRepository= RoomRepository()
     private val db= DellinApplication.instance?.database
     //массив терминалов  из базы данных
-    var arrayOfTerminalsParsed:Array<TerminalsParsed?>?=null
+    private var _arrayOfTerminalsParsed= MutableLiveData<Array<TerminalsParsed?>>()
+    val arrayOfTerminalsParsed
+        get()=_arrayOfTerminalsParsed
 
 
     fun createRequest() = viewModelScope.launch(Dispatchers.IO){
@@ -44,6 +48,6 @@ class MainViewModel: ViewModel() {
     }
     private fun updateArrayOfTerminals()
     {
-        arrayOfTerminalsParsed= roomRepository.getAllTerminals()
+        arrayOfTerminalsParsed.postValue(roomRepository.getAllTerminals())
     }
 }
