@@ -1,7 +1,6 @@
 package com.example.dellin.viewModel
 
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,12 +10,9 @@ import com.example.dellin.TerminalsParsed
 import com.example.dellin.retrofit.TerminalsRepository
 import com.example.dellin.room.Order
 import com.example.dellin.room.RoomRepository
-//import com.example.dellin.room.Order
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import java.io.IOException
 
 class MainViewModel: ViewModel() {
 
@@ -28,6 +24,11 @@ class MainViewModel: ViewModel() {
     val arrayOfTerminalsParsed
         get()=_arrayOfTerminalsParsed
 
+    init{
+        viewModelScope.launch(Dispatchers.IO){
+            _arrayOfTerminalsParsed.postValue(roomRepository.getAllTerminals())
+        }
+    }
     var firstTerminal=MutableLiveData<TerminalsParsed?>()
     var secondTerminal=MutableLiveData<TerminalsParsed?>()
 
@@ -35,9 +36,8 @@ class MainViewModel: ViewModel() {
     val snackbar:LiveData<String>
         get() = _snackbar
 
-    fun createRequest() = viewModelScope.launch(Dispatchers.IO){
+    fun updateDataInDatabase() = viewModelScope.launch(Dispatchers.IO){
         try {
-            updateArrayOfTerminals()
             val temp = repositoryRetrofit.createRequest()
             saveTerminalsToDatabase(temp)
             updateArrayOfTerminals()

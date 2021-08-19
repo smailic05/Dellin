@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.example.dellin.Terminals
 import com.example.dellin.TerminalsParsed
 // Класс заказов, сохраняемых в БД
 @Entity(tableName = "orders")

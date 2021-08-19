@@ -2,9 +2,10 @@ package com.example.dellin.ui.main
 
 import android.content.Context
 import android.location.Location
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.*
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -46,7 +47,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Запрашиваем данные с сервера
-        model.createRequest()
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        if(isConnected)
+            model.updateDataInDatabase()
+        else
+            Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
 
         model.snackbar.observe(viewLifecycleOwner,{
             Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
